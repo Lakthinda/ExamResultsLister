@@ -41,6 +41,7 @@ namespace ExamResultsLister.Controllers
             }
 
             // Business Logic here
+            // Linq code is split into 3 main section for easy reference
             var results = examResults.Where(es => es.Results.Any(r => r.Grade == GradeType.Pass))
                                     .Select(es => new
                                     {
