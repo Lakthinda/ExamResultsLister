@@ -25,3 +25,4 @@ changing the underline controller thus without changing the client API calls.
 - Use AutoMapper to map Model objects with ViewModel objects. Usually use to map DataContext objects (EF Objects) 
 with ViewModel objects.
 
+- Use AspNetCoreRateLimit to limit number of calls received from same IP for a sepcified period of times (2s)
