@@ -30,17 +30,16 @@ namespace ExamResultsLister.API.Controllers
         /// Returns List of ExamResults
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
-        //public async Task<IEnumerable<ExamSubjectViewModel>> Get()
+        [HttpGet]        
         public async Task<ActionResult> Get()
         {
             var examResults = await _examRepository.GetExamResults();
 
-            //if(examResults == null)
-            //{
-            //    _logger.LogInformation($"Exam Result list is empty");
-            //    return new List<ExamResultsViewModel>();
-            //}
+            if (examResults == null)
+            {
+                _logger.LogInformation($"Exam Result list is empty");
+                return NotFound();
+            }
 
             var result = Mapper.Map<List<ExamSubjectViewModel>>(examResults);
             
