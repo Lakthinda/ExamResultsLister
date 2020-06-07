@@ -1,0 +1,17 @@
+<h1 id="tableLabel">Exam Lister</h1>
+
+<p>This displays Exam results</p>
+
+<p *ngIf="!examResults"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="examResults">
+  <tr *ngFor="let result of examResults">
+    <td><strong>{{result.year}}</strong>     
+      <ul *ngIf="result.subjects">
+          <li *ngFor="let subject of result.subjects">
+            <span>{{subject}}</span>
+          </li>
+      </ul>
+    </td>    
+  </tr>
+</table>
