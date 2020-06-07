@@ -1,4 +1,4 @@
-#ExamResultLister Angular App
+# ExamResultLister Angular App
 - The ExamResultLister is an Angular and .net core app that is designed
 to consume 3rd party API to fetch data.
 
@@ -14,7 +14,7 @@ the frontend will only have to communicate with internal application.
 - ExamResultLister.Test project is created using Moq and NUnit
 
 
-#ExamResultLister API
+# ExamResultLister API
 - Created using .Net Core Web API template
 
 - RepositoryService is been used to get data, although it is hard-coded for this example, ideally
