@@ -26,3 +26,5 @@ changing the underline controller thus without changing the client API calls.
 with ViewModel objects.
 
 - Use AspNetCoreRateLimit to limit number of calls received from same IP for a sepcified period of times (2s)
+
+- ExamResultsLister.API.Test project is created using Moq and NUnit
