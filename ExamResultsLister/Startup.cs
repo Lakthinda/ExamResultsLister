@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Polly;
+using System.Net.Http;
 
 namespace ExamResultsLister
 {
@@ -20,6 +22,11 @@ namespace ExamResultsLister
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            IAsyncPolicy<HttpResponseMessage> retryPolicy =
+                                    Policy.HandleResult<HttpResponseMessage>(r => !r.IsSuccessStatusCode)
+                                    .RetryAsync(3);
+            services.AddSingleton<IAsyncPolicy<HttpResponseMessage>>(retryPolicy);
+
             services.AddControllersWithViews();
             services.AddHttpClient();
             services.AddTransient<IExamAPIService, ExamAPIService>();

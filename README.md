@@ -13,6 +13,8 @@ the frontend will only have to communicate with internal application.
 
 - ExamResultLister.Test project is created using Moq and NUnit
 
+- Add Polly to improve resilient when consuming third party API
+
 
 # ExamResultLister API
 - Created using .Net Core Web API template

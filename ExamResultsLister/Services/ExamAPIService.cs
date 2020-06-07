@@ -1,6 +1,7 @@
 ﻿using ExamResultsLister.Models;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Polly;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -15,12 +16,16 @@ namespace ExamResultsLister.Services
     {
         private readonly IHttpClientFactory _clientFactory;
         private readonly ILogger<ExamAPIService> _logger;
+        private readonly IAsyncPolicy<HttpResponseMessage> _retryPolicy;
 
         public ExamAPIService(IHttpClientFactory clientFactory,
-                              ILogger<ExamAPIService> logger)
+                              ILogger<ExamAPIService> logger,
+                              IAsyncPolicy<HttpResponseMessage> retryPolicy
+                              )
         {
             _clientFactory = clientFactory;
             _logger = logger;
+            _retryPolicy = retryPolicy;
         }
 
         /// <summary>
@@ -36,8 +41,9 @@ namespace ExamResultsLister.Services
                                                     APIURL);
                 request.Headers.Add("Accept", "application/json");
                 var client = _clientFactory.CreateClient();
-
-                var response = await client.SendAsync(request);
+                                
+                var response = await _retryPolicy.ExecuteAsync(() =>
+                        client.SendAsync(request));
 
                 if (response.IsSuccessStatusCode)
                 {
