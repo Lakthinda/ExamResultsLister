@@ -12,3 +12,16 @@ the frontend will only have to communicate with internal application.
 - The ExamResultLister was created using dotnet angular web template.
 
 - ExamResultLister.Test project is created using Moq and NUnit
+
+
+#ExamResultLister API
+- Created using .Net Core Web API template
+
+- RepositoryService is been used to get data, although it is hard-coded for this example, ideally
+we can inject DataContext 'ExamRepositoryService' and query database. We can implement different 
+repository classes to access data since it implements IRepositoryService without 
+changing the underline controller thus without changing the client API calls.
+
+- Use AutoMapper to map Model objects with ViewModel objects. Usually use to map DataContext objects (EF Objects) 
+with ViewModel objects.
+
